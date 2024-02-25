@@ -75,7 +75,7 @@
         function cekHasil() {
             var nomor = new URL(window.location.href).searchParams.get('nomor');
             if (nomor in dataLulus) {
-                document.getElementById('hasil').innerHTML = '<p>Selamat, Anda Dinyatakan Lulus Ujian!</p>'; /* Teks di dalam elemen <p> */
+                document.getElementById('hasil').innerHTML = '<p>Selamat, Anda Dinyatakan Lulus!</p>'; /* Teks di dalam elemen <p> */
                 document.getElementById('nama').innerHTML = 'Nama Lengkap: ' + dataLulus[nomor];
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
                 document.getElementById('konfir').innerHTML = '<p>Harap melakukan daftar ulang pada tanggal 17 Maret 2024, serta melengkapi persyaratan administrasi, untuk info lebih lanjut, mohon menghubungi panitia</p>';
