@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hasil Ujian PSB Pondok Modern Al-Ghozali</title>
+    <title>Pengumuman Hasil Ujian Masuk Santri Baru</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif; /* Font formal */
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhN-q_PA3LyaHQ1Z6bq00k6ox5YfHpH-zr2N-M3LIWom5yzLVWujimru_26BttOCrnUlGImCHMoo-cM3uIrHBcFGLUVywbklGPNf1Tn8CEF0J1wWt0yMnNQRGdiDX4sm2VBxdXELJl5mG4hhg5YPNPOy9G-v4HtDFqLn1A3G6_6jOCEB38HIe1LViZ6sFw/s1599/WhatsApp%20Image%202024-02-25%20at%2015.36.22_f9c5fa3f.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .hasil {
-            padding: 20px;
+            padding: 2px 2px; /* Padding atas dan bawah 10px, kiri dan kanan 20px */
             margin: 20px;
             border-radius: 5px;
             color: white;
+            width: 80%; /* Lebar kotak hijau/merah */
+            text-align: center;
+            font-weight: bold; /* Font tebal */
+        }
+        .hasil p {
+            font-size: 3em; 
+            margin: 0px;
+            padding: 20px;/* Ukuran font untuk teks di dalam kotak */
         }
         .lulus {
             background-color: green;
@@ -18,21 +37,50 @@
         .tidak-lulus {
             background-color: red;
         }
+        #nama, #nomor {
+            font-size: 2em;
+            margin: 10px 0; /* Jarak antara nama dan nomor */
+        }
+        .info-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            text-align: center;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .footer i {
+            color: white; /* Warna ikon */
+        }
+        @media screen and (max-width: 600px) {
+            #nama, #nomor {
+                font-size: 1.5em;
+            }
+        }
     </style>
     <script>
         // Contoh data nomor yang lulus dan tidak lulus
-        var dataLulus = {'123': 'Budi', '456': 'Siti', '789': 'Agus'};
-        var dataTidakLulus = {'321': 'Andi', '654': 'Mira', '987': 'Rina'};
+        var dataLulus = {'PSB2425.A.001': 'Budi', 'PSB2425.A.002': 'Siti', 'PSB2425.A.003': 'Agus'};
+        var dataTidakLulus = {'PSB2425.A.004': 'Andi', 'PSB2425.A.005': 'Mira', 'PSB2425.A.006': 'Rina'};
 
         function cekHasil() {
             var nomor = new URL(window.location.href).searchParams.get('nomor');
             if (nomor in dataLulus) {
-                document.getElementById('hasil').innerHTML = 'Selamat, Anda Lulus!';
+                document.getElementById('hasil').innerHTML = '<p>Selamat, Anda Dinyatakan Lulus!</p>'; /* Teks di dalam elemen <p> */
                 document.getElementById('nama').innerHTML = 'Nama: ' + dataLulus[nomor];
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
                 document.getElementById('hasil').className = 'hasil lulus';
             } else if (nomor in dataTidakLulus) {
-                document.getElementById('hasil').innerHTML = 'Maaf, Anda Tidak Lulus.';
+                document.getElementById('hasil').innerHTML = '<p>Maaf, Anda Dinyatakan Tidak Lulus.</p>'; /* Teks di dalam elemen <p> */
                 document.getElementById('nama').innerHTML = 'Nama: ' + dataTidakLulus[nomor];
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
                 document.getElementById('hasil').className = 'hasil tidak-lulus';
@@ -43,8 +91,16 @@
     </script>
 </head>
 <body onload="cekHasil()">
+    <img src="https://backend.alghozali.ac.id/uploads/logo_pondok_modern_al_ghozali_d19d557372.png" alt="Logo Sekolah" style="position: absolute; top: 10px; left: 10px; width: 150px;">
     <div id="hasil"></div>
-    <p id="nama"></p>
-    <p id="nomor"></p>
+    <div class="info-container">
+        <p id="nama"></p>
+        <p id="nomor"></p>
+    </div>
+    <div class="footer">
+        <p>Created by Lovaire</p>
+        <a href="https://www.youtube.com/@alghozalimediacenter" target="_blank"><i class="fa fa-youtube"></i></a>
+        <a href="https://www.instagram.com/pmalghozali/" target="_blank"><i class="fa fa-instagram"></i></a>
+    </div>
 </body>
 </html>

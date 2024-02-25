@@ -1,14 +1,84 @@
-<!-- Halaman pertama untuk memasukkan nomor ujian -->
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Pengumuman Ujian PSB Pondok Modern Al-Ghozali</title>
+    <title>Pengumuman Hasil Ujian Masuk Santri Baru</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://backend.alghozali.ac.id/uploads/banner_pondok_modern_al_ghozali_1ce7984d9a.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .container h1, .container h2, .container h3, .container h5 {
+            margin: 10px 0;  /* Atur jarak atas dan bawah menjadi 10px */
+        }
+        input[type="text"] {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .footer i {
+            color: white; /* Warna ikon */
+        }
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 80%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1></h1>
-    <p>Silakan masukkan nomor PSB Anda</p>
-    <form action="hasil.html" method="GET">
-        <input type="text" name="nomor" placeholder="Nomor ujian" required>
-        <input type="submit" value="Oke">
-    </form>
+    <img src="https://backend.alghozali.ac.id/uploads/logo_pondok_modern_al_ghozali_d19d557372.png" alt="Logo Sekolah" style="position: absolute; top: 10px; left: 10px; width: 150px;">
+    <div class="container">
+        <h1>Pengumuman Hasil Ujian Masuk Santri Baru</h1>
+        <h2>Pondok Modern Al-Ghozali</h2>
+        <h3>Tahun Ajaran 2024 - 2025</h3>
+        <h5>Gelombang 1</h5>
+        <p>Silakan masukkan nomor PSB Anda</p>
+        <form action="hasil.html" method="GET">
+            <input type="text" name="nomor" placeholder="Nomor PSB" required>
+            <input type="submit" value="Oke">
+        </form>
+    </div>
+    <div class="footer">
+        <p>Created by Lovaire</p>
+        <a href="https://www.youtube.com/@alghozalimediacenter" target="_blank"><i class="fa fa-youtube"></i></a>
+        <a href="https://www.instagram.com/pmalghozali/" target="_blank"><i class="fa fa-instagram"></i></a>
+    </div>
 </body>
 </html>
