@@ -6,26 +6,36 @@
         body {
             font-family: Arial, sans-serif;
         }
+        .hasil {
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            color: white;
+        }
         .lulus {
-            color: green;
+            background-color: green;
         }
         .tidak-lulus {
-            color: red;
+            background-color: red;
         }
     </style>
     <script>
         // Contoh data nomor yang lulus dan tidak lulus
-        var dataLulus = ['123', '456', '789'];
-        var dataTidakLulus = ['321', '654', '987'];
+        var dataLulus = {'123': 'Budi', '456': 'Siti', '789': 'Agus'};
+        var dataTidakLulus = {'321': 'Andi', '654': 'Mira', '987': 'Rina'};
 
         function cekHasil() {
             var nomor = new URL(window.location.href).searchParams.get('nomor');
-            if (dataLulus.includes(nomor)) {
+            if (nomor in dataLulus) {
                 document.getElementById('hasil').innerHTML = 'Selamat, Anda Lulus!';
-                document.getElementById('hasil').className = 'lulus';
-            } else if (dataTidakLulus.includes(nomor)) {
+                document.getElementById('nama').innerHTML = 'Nama: ' + dataLulus[nomor];
+                document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
+                document.getElementById('hasil').className = 'hasil lulus';
+            } else if (nomor in dataTidakLulus) {
                 document.getElementById('hasil').innerHTML = 'Maaf, Anda Tidak Lulus.';
-                document.getElementById('hasil').className = 'tidak-lulus';
+                document.getElementById('nama').innerHTML = 'Nama: ' + dataTidakLulus[nomor];
+                document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
+                document.getElementById('hasil').className = 'hasil tidak-lulus';
             } else {
                 document.getElementById('hasil').innerHTML = 'Nomor ujian tidak ditemukan.';
             }
@@ -33,6 +43,8 @@
     </script>
 </head>
 <body onload="cekHasil()">
-    <h1 id="hasil"></h1>
+    <div id="hasil"></div>
+    <p id="nama"></p>
+    <p id="nomor"></p>
 </body>
 </html>
