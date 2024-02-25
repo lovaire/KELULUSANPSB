@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Formulir Input Data Ujian</title>
+    <title>Database Maker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            font-family: 'Times New Roman', Times, serif;
-            background-image: url('https://backend.alghozali.ac.id/uploads/banner_pondok_modern_al_ghozali_1ce7984d9a.jpg');
+            font-family: Arial, sans-serif;
+            background-image: url('https://backend.alghozali.ac.id/uploads/pengenalan_pondok_modern_al_ghozali_3d37272ab8.jpg');
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -55,6 +55,7 @@
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: space-between;
+            font-size: 1em;
         }
         .header-box {
             background-color: rgba(0, 0, 0, 0.7);
@@ -88,7 +89,7 @@
 <body onload="cekHasil()">
     <img src="https://backend.alghozali.ac.id/uploads/logo_pondok_modern_al_ghozali_d19d557372.png" alt="Logo Sekolah" style="position: absolute; top: 10px; left: 10px; width: 150px;">
     <div class="header-box">
-        <h2>SIPENDAFTAR  (Sistem Informasi Pendaftaran)</h2>
+        <h2>Database Maker</h2>
     </div>
 
     <input class="input-field" type="text" id="nomor" name="nomor" placeholder="Nomor Ujian"><br>
@@ -98,13 +99,12 @@
     <div class="data-box">
         <h2>Data:</h2>
         <pre id="data"></pre>
+        <button class="button-field" onclick="salinData()">Salin</button>
     </div>
-    <button class="button-field" onclick="salinData()">Salin</button>
-
+    
     <div class="footer">
         <p>Created by Lovaire</p>
-        <a href="https://www.youtube.com/user/lovaire" target="_blank"><i class="fa fa-youtube"></i></a>
-        <a href="https://www.instagram.com/lovaire/" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://www.instagram.com/rifqirahmaat/" target="_blank"><i class="fa fa-instagram"></i></a>
     </div>
 </body>
 </html>

@@ -27,7 +27,7 @@
             font-weight: bold; /* Font tebal */
         }
         .hasil p {
-            font-size: 3em; 
+            font-size: 2em; 
             margin: 0px;
             padding: 20px;/* Ukuran font untuk teks di dalam kotak */
         }
@@ -38,7 +38,7 @@
             background-color: red;
         }
         #nama, #nomor {
-            font-size: 2em;
+            font-size: 1.2em;
             margin: 10px 0; /* Jarak antara nama dan nomor */
         }
         .info-container {
@@ -69,24 +69,28 @@
     </style>
     <script>
         // Contoh data nomor yang lulus dan tidak lulus
-        var dataLulus = {'PSB2425.A.001': 'Budi', 'PSB2425.A.002': 'Siti', 'PSB2425.A.003': 'Agus'};
+        var dataLulus = {"PSB2425.A.001": "Budi", 'PSB2425.A.002': 'Siti', 'PSB2425.A.003': 'Agus'};
         var dataTidakLulus = {'PSB2425.A.004': 'Andi', 'PSB2425.A.005': 'Mira', 'PSB2425.A.006': 'Rina'};
 
         function cekHasil() {
             var nomor = new URL(window.location.href).searchParams.get('nomor');
             if (nomor in dataLulus) {
                 document.getElementById('hasil').innerHTML = '<p>Selamat, Anda Dinyatakan Lulus!</p>'; /* Teks di dalam elemen <p> */
-                document.getElementById('nama').innerHTML = 'Nama: ' + dataLulus[nomor];
+                document.getElementById('nama').innerHTML = 'Nama Lengkap: ' + dataLulus[nomor];
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
+                document.getElementById('konfir').innerHTML = '<p>Harap melakukan daftar ulang pada tanggal 17 Maret 2024, serta melengkapi persyaratan administrasi, untuk info lebih lanjut, mohon menghubungi panitia</p>';
+                document.getElementById('pesan').innerHTML = 'Ayo share hasil perjuangan kamu di story instagram, dan jangan lupa tag @pmalghozali ! ᕙ(  •̀ ᗜ •́  )ᕗ';
                 document.getElementById('hasil').className = 'hasil lulus';
             } else if (nomor in dataTidakLulus) {
                 document.getElementById('hasil').innerHTML = '<p>Maaf, Anda Dinyatakan Tidak Lulus.</p>'; /* Teks di dalam elemen <p> */
                 document.getElementById('nama').innerHTML = 'Nama: ' + dataTidakLulus[nomor];
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
+                document.getElementById('pesan').innerHTML = 'Jangan patah semangat, terus berusaha dan belajar lebih giat! („• ֊ •„)੭';
                 document.getElementById('hasil').className = 'hasil tidak-lulus';
             } else {
                 document.getElementById('hasil').innerHTML = 'Nomor ujian tidak ditemukan.';
             }
+            
         }
     </script>
 </head>
@@ -96,6 +100,8 @@
     <div class="info-container">
         <p id="nama"></p>
         <p id="nomor"></p>
+        <p id="konfir"></p>
+        <i id="pesan"></i>
     </div>
     <div class="footer">
         <p>Created by Lovaire</p>
