@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulir Input Data Ujian</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-image: url('https://backend.alghozali.ac.id/uploads/banner_pondok_modern_al_ghozali_1ce7984d9a.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            color: #ddd;
+        }
+        .footer i {
+            color: white;
+        }
+        .input-field, .button-field {
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+            color: black;
+        }
+        .data-box {
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .header-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        var dataArray = {};
+
+        function tambahData() {
+            var nomor = document.getElementById("nomor").value;
+            var nama = document.getElementById("nama").value;
+            dataArray[nomor] = nama;
+            tampilkanData();
+        }
+
+        function tampilkanData() {
+            var dataString = JSON.stringify(dataArray, null, 2);
+            document.getElementById("data").textContent = dataString;
+        }
+
+        function salinData() {
+            var dataString = JSON.stringify(dataArray, null, 2);
+            navigator.clipboard.writeText(dataString);
+        }
+    </script>
+</head>
+<body onload="cekHasil()">
+    <img src="https://backend.alghozali.ac.id/uploads/logo_pondok_modern_al_ghozali_d19d557372.png" alt="Logo Sekolah" style="position: absolute; top: 10px; left: 10px; width: 150px;">
+    <div class="header-box">
+        <h2>SIPENDAFTAR  (Sistem Informasi Pendaftaran)</h2>
+    </div>
+
+    <input class="input-field" type="text" id="nomor" name="nomor" placeholder="Nomor Ujian"><br>
+    <input class="input-field" type="text" id="nama" name="nama" placeholder="Nama Lengkap"><br><br>
+    <button class="button-field" onclick="tambahData()">Masukkan</button>
+
+    <div class="data-box">
+        <h2>Data:</h2>
+        <pre id="data"></pre>
+    </div>
+    <button class="button-field" onclick="salinData()">Salin</button>
+
+    <div class="footer">
+        <p>Created by Lovaire</p>
+        <a href="https://www.youtube.com/user/lovaire" target="_blank"><i class="fa fa-youtube"></i></a>
+        <a href="https://www.instagram.com/lovaire/" target="_blank"><i class="fa fa-instagram"></i></a>
+    </div>
+</body>
+</html>
