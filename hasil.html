@@ -1,47 +1,38 @@
-<!-- Halaman kedua untuk menampilkan hasil lulus atau tidak lulus -->
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Pengumuman Hasil Ujian PSB Pondok Modern Al-Ghozali</title>
-    <script>
-        // Fungsi untuk mendapatkan parameter dari URL
-        function getParameter(name) {
-            let url = new URL(window.location.href);
-            return url.searchParams.get(name);
+    <title>Hasil Ujian PSB Pondok Modern Al-Ghozali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
         }
+        .lulus {
+            color: green;
+        }
+        .tidak-lulus {
+            color: red;
+        }
+    </style>
+    <script>
+        // Contoh data nomor yang lulus dan tidak lulus
+        var dataLulus = ['123', '456', '789'];
+        var dataTidakLulus = ['321', '654', '987'];
 
-        // Fungsi untuk menampilkan hasil lulus atau tidak lulus
-        function showResult() {
-            // Mendapatkan nomor ujian dari parameter URL
-            let nomor = getParameter("nomor");
-
-            // Menyimpan data nomor ujian dan hasil seleksi di array
-            // Anda bisa mengganti data ini dengan data dari database Anda
-            let data = [
-                {nomor: "001", lulus: true},
-                {nomor: "002", lulus: false},
-                {nomor: "003", lulus: true},
-                {nomor: "004", lulus: false},
-                {nomor: "005", lulus: true}
-            ];
-
-            // Mencari data yang sesuai dengan nomor ujian
-            let hasil = data.find(item => item.nomor == nomor);
-
-            // Menampilkan hasil lulus atau tidak lulus
-            if (hasil) {
-                if (hasil.lulus) {
-                    document.getElementById("pesan").innerHTML = "Selamat, Anda lulus seleksi masuk!";
-                } else {
-                    document.getElementById("pesan").innerHTML = "Maaf, Anda tidak lulus seleksi masuk.";
-                }
+        function cekHasil() {
+            var nomor = new URL(window.location.href).searchParams.get('nomor');
+            if (dataLulus.includes(nomor)) {
+                document.getElementById('hasil').innerHTML = 'Selamat, Anda Lulus!';
+                document.getElementById('hasil').className = 'lulus';
+            } else if (dataTidakLulus.includes(nomor)) {
+                document.getElementById('hasil').innerHTML = 'Maaf, Anda Tidak Lulus.';
+                document.getElementById('hasil').className = 'tidak-lulus';
             } else {
-                document.getElementById("pesan").innerHTML = "Nomor ujian tidak ditemukan.";
+                document.getElementById('hasil').innerHTML = 'Nomor ujian tidak ditemukan.';
             }
         }
     </script>
 </head>
-<body onload="showResult()">
-    <h1>Hasil lulus seleksi masuk</h1>
-    <p id="pesan"></p>
+<body onload="cekHasil()">
+    <h1 id="hasil"></h1>
 </body>
 </html>
