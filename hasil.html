@@ -37,6 +37,9 @@
         .tidak-lulus {
             background-color: red;
         }
+        .tidak-ada {
+            background-color: grey;
+        }
         #nama, #nomor {
             font-size: 1.2em;
             margin: 10px 0; /* Jarak antara nama dan nomor */
@@ -163,7 +166,7 @@
                 document.getElementById('hasil').innerHTML = '<p>Selamat, Anda Dinyatakan Lulus!</p>'; /* Teks di dalam elemen <p> */
                 document.getElementById('nama').innerHTML = 'Nama Lengkap: ' + dataLulus[nomor];
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
-                document.getElementById('konfir').innerHTML = '<p>Harap melakukan daftar ulang pada tanggal 17 Maret 2024, serta melengkapi persyaratan administrasi, untuk info lebih lanjut, mohon menghubungi panitia</p>';
+                document.getElementById('konfir').innerHTML = '<p>Harap melakukan daftar ulang pada tanggal 17 Maret 2024, serta melengkapi persyaratan administrasi, untuk informasi lebih lanjut, silakan menghubungi panitia, Terima Kasih</p>';
                 document.getElementById('pesan').innerHTML = 'Ayo share hasil perjuangan kamu di story instagram, dan jangan lupa tag @pmalghozali ! ᕙ(  •̀ ᗜ •́  )ᕗ';
                 document.getElementById('hasil').className = 'hasil lulus';
             } else if (nomor in dataTidakLulus) {
@@ -174,7 +177,7 @@
                 document.getElementById('hasil').className = 'hasil tidak-lulus';
             } else {
                 document.getElementById('hasil').innerHTML = '<p>Nomor ujian tidak ditemukan.</P>';
-                document.getElementById('hasil').className = 'hasil lulus';
+                document.getElementById('hasil').className = 'hasil tidak-ada';
             }
             
         }
