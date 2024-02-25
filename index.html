@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Pengumuman Hasil Ujian Masuk Santri Baru</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
@@ -25,6 +26,8 @@
             background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
+            width: 80%; /* Mengatur lebar kontainer agar tidak terlalu lebar di perangkat mobile */
+            max-width: 400px; /* Maksimum lebar kontainer agar tidak terlalu lebar di layar besar */
         }
         .container h1, .container h2, .container h3, .container h5 {
             margin: 10px 0;  /* Atur jarak atas dan bawah menjadi 10px */
@@ -56,8 +59,11 @@
             color: white; /* Warna ikon */
         }
         @media screen and (max-width: 600px) {
-            #nama, #nomor {
-                font-size: 1.5em;
+            .container {
+                width: 90%; /* Menyesuaikan lebar kontainer untuk perangkat dengan lebar layar <= 600px */
+            }
+            input[type="text"] {
+                font-size: 0.8em; /* Mengurangi ukuran font input untuk perangkat mobile */
             }
         }
     </style>
