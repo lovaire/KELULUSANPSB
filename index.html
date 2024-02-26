@@ -26,11 +26,11 @@
             background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
-            width: 80%; /* Mengatur lebar kontainer agar tidak terlalu lebar di perangkat mobile */
-            max-width: 400px; /* Maksimum lebar kontainer agar tidak terlalu lebar di layar besar */
+            width: 80%;
+            max-width: 400px;
         }
         .container h1, .container h2, .container h3, .container h5 {
-            margin: 10px 0;  /* Atur jarak atas dan bawah menjadi 10px */
+            margin: 10px 0;
         }
         input[type="text"] {
             margin: 10px 0;
@@ -56,23 +56,22 @@
             padding: 10px;
         }
         .footer i {
-            color: white; /* Warna ikon */
+            color: white;
         }
         @media screen and (max-width: 600px) {
             body {
                 font-size: 1.2em;
             }
             img {
-                width: 50%; /* Atur sesuai kebutuhan */ 
+                width: 100%; 
             }
             .container {
-                width: 90%; /* Menyesuaikan lebar kontainer untuk perangkat dengan lebar layar <= 600px */
-                height: 50vh;
+                width: 90%;
+                height: auto;
             }
-            input[type="text"], button {
-                font-size: 0.8em; /* Mengurangi ukuran font input untuk perangkat mobile */
-                width: 100%; /* Atur sesuai kebutuhan */
-                padding: 10px; /* Atur sesuai kebutuhan */
+            input[type="text"], input[type="submit"] {
+                font-size: 1em;
+                padding: 15px;
             }
         }
     </style>
