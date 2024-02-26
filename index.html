@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Pengumuman Hasil Ujian Masuk Santri Baru</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
@@ -59,11 +59,20 @@
             color: white; /* Warna ikon */
         }
         @media screen and (max-width: 600px) {
+            body {
+                font-size: 1.2em;
+            }
+            img {
+                width: 50%; /* Atur sesuai kebutuhan */ 
+            }
             .container {
                 width: 90%; /* Menyesuaikan lebar kontainer untuk perangkat dengan lebar layar <= 600px */
+                height: 50vh;
             }
-            input[type="text"] {
+            input[type="text"], button {
                 font-size: 0.8em; /* Mengurangi ukuran font input untuk perangkat mobile */
+                width: 100%; /* Atur sesuai kebutuhan */
+                padding: 10px; /* Atur sesuai kebutuhan */
             }
         }
     </style>
