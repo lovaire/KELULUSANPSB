@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif; /* Font formal */
-            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhN-q_PA3LyaHQ1Z6bq00k6ox5YfHpH-zr2N-M3LIWom5yzLVWujimru_26BttOCrnUlGImCHMoo-cM3uIrHBcFGLUVywbklGPNf1Tn8CEF0J1wWt0yMnNQRGdiDX4sm2VBxdXELJl5mG4hhg5YPNPOy9G-v4HtDFqLn1A3G6_6jOCEB38HIe1LViZ6sFw/s1599/WhatsApp%20Image%202024-02-25%20at%2015.36.22_f9c5fa3f.jpg');
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjagCxQ0gHorGQVnpxZmPy6t7FM6XPcYBaDHgjFQPvKw28YYUmFjBo88NW9-FuokLVcS-IyGY7dmipS8BZ5DAMkDUS72x-8Fj1ZUJP8HQuk2oXZOqFg76ZftrTKw_d3mCxeahS6JNwgw8IPijB5Dq_P305eqtpza3pnXBzmyt0A3mgg8T8S-6cZsoJsNys/s320/logo%20Al-Ghozali%20(1).png');
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -200,7 +200,7 @@
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
                 document.getElementById('pesan').innerHTML = 'Jangan patah semangat, terus berusaha dan belajar lebih giat! („• ֊ •„)੭';
                 document.getElementById('hasil').className = 'hasil tidak-lulus';
-            } else if (nomor in dataTidakLulus) {
+            } else if (nomor in dataLulusBersyarat) {
                 document.getElementById('hasil').innerHTML = '<p>Maaf, Anda Dinyatakan Lulus Bersyarat</p>'; /* Teks di dalam elemen <p> */
                 document.getElementById('nama').innerHTML = 'Nama: ' + dataTidakLulus[nomor];
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
