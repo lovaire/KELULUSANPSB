@@ -202,7 +202,7 @@
                 document.getElementById('hasil').className = 'hasil tidak-lulus';
             } else if (nomor in dataLulusBersyarat) {
                 document.getElementById('hasil').innerHTML = '<p>Maaf, Anda Dinyatakan Lulus Bersyarat</p>'; /* Teks di dalam elemen <p> */
-                document.getElementById('nama').innerHTML = 'Nama: ' + dataTidakLulus[nomor];
+                document.getElementById('nama').innerHTML = 'Nama: ' + dataLulusBersyarat[nomor];
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
                 document.getElementById('pesan').innerHTML = 'Untuk informasi selengkapnya, silakan menghubungi panitia, Terima Kasih.';
                 document.getElementById('hasil').className = 'hasil lulus-bersyarat';
