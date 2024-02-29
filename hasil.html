@@ -38,6 +38,9 @@
         .tidak-lulus {
             background-color: red;
         }
+        .lulus-bersyarat {
+            background-color: yellow;
+        }
         .tidak-ada {
             background-color: grey;
         }
@@ -162,8 +165,15 @@
 //   "PSB2425-E007": "REFFAN ARDIANSYAH SAFARI PRATAMA",
 //   "PSB2425-G003": "TSABITAH AGUSTIN SYA'BANI",
 //   "PSB2425-G001": "KHANZA "
+// "PSB2425-C004": "TESA WAHYU NOVELISA",
+// "PSB2425-C024": "MIZANI FAJRIYA HAQQY"
+
 }
-        var dataTidakLulus = {'PSB2425.Z.004': 'Andi', 'PSB2425.A.005': 'Mira', 'PSB2425.A.006': 'Rina'};
+        var dataTidakLulus = { 
+            // "PSB2425-C006": "SYIFA NURUSHOLEHA",
+            // "PSB2425-C027": "ALYA ZAHIRA PUTRI"};
+        }
+        var dataLulusBersyarat = {}
 
         function cekHasil() {
             var nomor = new URL(window.location.href).searchParams.get('nomor');
@@ -180,6 +190,12 @@
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
                 document.getElementById('pesan').innerHTML = 'Jangan patah semangat, terus berusaha dan belajar lebih giat! („• ֊ •„)੭';
                 document.getElementById('hasil').className = 'hasil tidak-lulus';
+            } else if (nomor in dataTidakLulus) {
+                document.getElementById('hasil').innerHTML = '<p>Maaf, Anda Dinyatakan Lulus Bersyarat</p>'; /* Teks di dalam elemen <p> */
+                document.getElementById('nama').innerHTML = 'Nama: ' + dataTidakLulus[nomor];
+                document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
+                document.getElementById('pesan').innerHTML = 'Untuk informasi selengkapnya, silakan menghubungi panitia, Terima Kasih.';
+                document.getElementById('hasil').className = 'hasil lulus-bersyarat';
             } else {
                 document.getElementById('hasil').innerHTML = '<p>Nomor ujian tidak ditemukan.</P>';
                 document.getElementById('hasil').className = 'hasil tidak-ada';
@@ -198,7 +214,7 @@
         <i id="pesan"></i>
     </div>
     <div class="footer">
-        <p>Created by Lovaire</p>
+        <p>Created by Al-Ghozali IT Team</p>
         <a href="https://www.youtube.com/@alghozalimediacenter" target="_blank"><i class="fa fa-youtube"></i></a>
         <a href="https://www.instagram.com/pmalghozali/" target="_blank"><i class="fa fa-instagram"></i></a>
     </div>

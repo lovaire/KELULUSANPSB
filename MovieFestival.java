@@ -1,242 +1,302 @@
-import java.io.*;
 import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
-public class MovieFestival {
-    public static final int MOD = 1000000007;
-    public static int N, M, T;
-    public static int[][] movies;
-    public static Moviegoer[] moviegoers;
-    public static int[] moviePriority;
-    public static List<Booking>[] bookingQueue;
-    public static int[] movieCount;
-
-    public static void main(String[] args) {
-        FastReader in = new FastReader();
-        PrintWriter out = new PrintWriter(System.out);
-
-        N = in.nextInt();
-        movies = new int[N * 3][3];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < 3; j++) {
-                movies[i * 3 + j][0] = in.nextInt();
-                movies[i * 3 + j][1] = in.nextInt();
-                movies[i * 3 + j][2] = in.nextInt();
-            }
-        }
-
-        M = in.nextInt();
-        moviegoers = new Moviegoer[M];
-        for (int i = 0; i < M; i++) {
-            String type = in.next();
-            int money = in.nextInt();
-            moviegoers[i] = new Moviegoer(i, type.equals("M"), money);
-        }
-
-        T = in.nextInt();
-        moviePriority = new int[N * 3];
-        bookingQueue = new List[N * 3];
-        for (int i = 0; i < N * 3; i++) {
-            moviePriority[i] = (int) Math.ceil(movies[i][1] * movies[i][2] / 100.0);
-            bookingQueue[i] = new ArrayList<>();
-        }
-
-        movieCount = new int[M];
-        for (int i = 0; i < T; i++) {
-            String op = in.next();
-            if (op.equals("B")) {
-                int moviegoerId = in.nextInt() - 1;
-                int movieId = in.nextInt() - 1;
-                bookMovie(moviegoers[moviegoerId], movieId);
-                out.println(bookingQueue[movieId].size());
-            } else if (op.equals("P")) {
-                int movieId = in.nextInt() - 1;
-                playMovie(movieId, out);
-            } else if (op.equals("T")) {
-                int moviegoerId = in.nextInt() - 1;
-                int movieId = in.nextInt() - 1;
-                trackBooking(moviegoers[moviegoerId], movieId, out);
-            } else if (op.equals("J")) {
-                int type = in.nextInt();
-                joinFestival(type, out);
-            }
-        }
-
-        out.flush();
-    }
-
-    public static void bookMovie(Moviegoer moviegoer, int movieId) {
-        if (moviegoer.money >= movies[movieId][0]) {
-            List<Booking> queue = bookingQueue[movieId];
-            int priority = moviegoer.isMember ? 0 : moviePriority[movieId];
-            queue.add(new Booking(moviegoer.id, moviegoer.count, priority));
-            queue.sort(Comparator.comparing((Booking b) -> b.priority)
-                               .thenComparing(b -> b.count)
-                               .thenComparing(b -> b.id));
-        }
-    }
-
-    public static void playMovie(int movieId, PrintWriter out) {
-        List<Booking> queue = bookingQueue[movieId];
-        if (queue.isEmpty()) {
-            out.println(-1);
-            return;
-        }
-
-        int capacity = movies[movieId][1];
-        int price = movies[movieId][0];
-        for (int i = 0; i < Math.min(capacity, queue.size()); i++) {
-            Booking booking = queue.get(i);
-            Moviegoer moviegoer = moviegoers[booking.id];
-            moviegoer.money -= price;
-            moviegoer.count++;
-            movieCount[moviegoer.id]++;
-            out.print((moviegoer.id + 1) + " ");
-        }
-        out.println();
-        queue.clear();
-    }
-
-    public static void trackBooking(Moviegoer moviegoer, int movieId, PrintWriter out) {
-        List<Booking> queue = bookingQueue[movieId];
-        int index = -1;
-        for (int i = 0; i < queue.size(); i++) {
-            if (queue.get(i).id == moviegoer.id) {
-                index = i + 1;
-                break;
-            }
-        }
-        out.println(index);
-    }
-
-    public static void joinFestival(int type, PrintWriter out) {
-        if (type == 0) {
-            int[] genres = new int[3];
-            genres[0] = genres[1] = genres[2] = -1;
-            int maxPrice = 0;
-            for (int i = 0; i < N; i++) {
-                int[] prices = new int[3];
-                for (int j = 0; j < 3; j++) {
-                    prices[j] = movies[i * 3 + j][0];
-                }
-                Arrays.sort(prices);
-                int currPrice = 0;
-                for (int j = 2; j >= 0; j--) {
-                    if (prices[j] > genres[j] || (prices[j] == genres[j] && genres[j] == -1)) {
-                        genres[j] = prices[j];
-                        currPrice += prices[j];
-                    }
-                }
-                if (currPrice > maxPrice) {
-                    maxPrice = currPrice;
-                }
-            }
-            out.println(maxPrice);
-        } else {
-            int[] genres = new int[N];
-            int maxPrice = 0;
-            for (int i = 0; i < N; i++) {
-                int[] prices = new int[3];
-                for (int j = 0; j < 3; j++) {
-                    prices[j] = movies[i * 3 + j][0];
-                }
-                Arrays.sort(prices);
-                int currPrice = 0;
-                int[] currGenres = new int[3];
-                for (int j = 2; j >= 0; j--) {
-                    if (prices[j] > currGenres[j]) {
-                        currGenres[j] = prices[j];
-                        currPrice += prices[j];
-                    }
-                }
-                if (currPrice > maxPrice) {
-                    maxPrice = currPrice;
-                    for (int j = 0; j < 3; j++) {
-                        genres[i] = findMovieIndex(currGenres[j]) + 1;
-                    }
-                } else if (currPrice == maxPrice) {
-                    int[] tempGenres = new int[N];
-                    for (int j = 0; j < 3; j++) {
-                        tempGenres[i] = findMovieIndex(currGenres[j]) + 1;
-                    }
-                    if (compareLexicographically(tempGenres, genres)) {
-                        System.arraycopy(tempGenres, 0, genres, 0, N);
-                    }
-                }
-            }
-            for (int i = 0; i < N; i++) {
-                out.print(genres[i] + " ");
-            }
-            out.println();
-        }
-    }
-
-    public static int findMovieIndex(int price) {
-        for (int i = 0; i < movies.length; i++) {
-            if (movies[i][0] == price) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public static boolean compareLexicographically(int[] a, int[] b) {
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] < b[i]) {
-                return true;
-            } else if (a[i] > b[i]) {
-                return false;
-            }
-        }
-        return false;
-    }
-
+class MovieFestival {
     static class Moviegoer {
-        int id;
+        int id, money; 
         boolean isMember;
-        int money;
-        int count;
-
+        int watchedMovies;
+        
         Moviegoer(int id, boolean isMember, int money) {
             this.id = id;
             this.isMember = isMember;
             this.money = money;
-            this.count = 0;
+            this.watchedMovies = 0;  
         }
     }
-
-    static class Booking {
-        int id;
-        int count;
-        int priority;
-
-        Booking(int id, int count, int priority) {
+    
+    static class Movie {
+        int id, price, capacity, memberPercentage; 
+        Queue<Moviegoer> queue = new LinkedList<>();
+        
+        Movie(int id, int price, int capacity, int memberPercentage) {
             this.id = id;
-            this.count = count;
-            this.priority = priority;
+            this.price = price;    
+            this.capacity = capacity;
+            this.memberPercentage = memberPercentage;
+        }
+        
+        void book(Moviegoer m) {
+            if (m.money >= price) {
+                queue.add(m);
+            }
+        }
+        
+        void play() {
+            if (queue.isEmpty()) {
+                System.out.println(-1);
+                return;
+            }
+            
+            int memberSpots = (int)Math.ceil(capacity * (memberPercentage/100.0)); 
+            Stack<Integer> viewers = new Stack<>();
+            
+            while (!queue.isEmpty() && viewers.size() < capacity) {
+                Moviegoer m = queue.poll();
+                viewers.push(m.id);
+                m.watchedMovies++;
+                m.money -= price;  
+            }
+            
+            while (!viewers.isEmpty()) {
+                System.out.print(viewers.pop() + " "); 
+            }
+            System.out.println();
+        }
+        
+        int getViewerPos(Moviegoer m) {
+            if (!queue.contains(m)) return -1;
+            
+            int pos = 1;
+            for (Moviegoer viewer : queue) {
+                if (viewer == m) return pos;
+                pos++;
+            }
+            return -1;
         }
     }
-
-    static class FastReader {
-        BufferedReader br;
-        StringTokenizer st;
-
-        FastReader() {
-            br = new BufferedReader(new InputStreamReader(System.in));
-        }
-
-        String next() {
-            while (st == null || !st.hasMoreElements()) {
-                try {
-                    st = new StringTokenizer(br.readLine());
-                } catch (IOException e) {
-                    e.printStackTrace();
+    
+    static void joinFestival(int N, List<Movie> movies, List<Moviegoer> moviegoers, int type, int day) {
+        if (type == 0) {
+            int[] maxPrices = new int[N];
+            int[] genres = new int[N];
+            
+            maxPrices[0] = Integer.MIN_VALUE;
+            for (Movie m : movies) {
+                if (m.price > maxPrices[0]) {
+                    genres[0] = m.id % 3 + 1; 
+                    maxPrices[0] = m.price;
                 }
             }
-            return st.nextToken();
+            
+            for (int i=1; i<N; i++) {
+                maxPrices[i] = Integer.MIN_VALUE;
+                
+                for (Movie m : movies) { 
+                    if (genres[i-1] != m.id % 3 + 1 && m.price > maxPrices[i]) {
+                        genres[i] = m.id % 3 + 1;
+                        maxPrices[i] = m.price;    
+                    }
+                }
+            }
+            
+            int total = 0;
+            for (int price : maxPrices) total += price;
+            
+            System.out.println(total);
+            
+        } else {
+            int[] maxPrices = new int[N]; 
+            int[][] possibilities = new int[N][N];
+            
+            maxPrices[0] = Integer.MIN_VALUE;
+            for (Movie m : movies) {
+                if (m.price > maxPrices[0]) {
+                    possibilities[0][0] = m.id % 3 + 1;  
+                    maxPrices[0] = m.price;
+                }
+            }
+            
+            for (int i=1; i<N; i++) {
+            
+                maxPrices[i] = Integer.MIN_VALUE;
+                int index = 0;
+                
+                for (Movie m : movies) {
+                
+                    boolean valid = true;
+                    if (i > 0) {
+                        for (int j=0; j<i; j++) {
+                            if (possibilities[j][index] == m.id % 3 + 1) {
+                                valid = false;
+                                break;
+                            }
+                        } 
+                    }
+                
+                    if (valid && m.price > maxPrices[i]) {
+                        possibilities[i][index] = m.id % 3 + 1;
+                        maxPrices[i] = m.price;    
+                    }
+                }
+                index++;
+            }
+            
+            int maxTotal = 0;
+            int[] sequence = new int[N];
+            
+            for (int i=0; i<possibilities[0].length; i++) {
+                int total = maxPrices[0];
+                sequence[0] = possibilities[0][i];
+                
+                for (int j=1; j<N; j++) {   
+                    boolean found = false;
+                    
+                    for (int k=0; k<possibilities[j].length; k++) {
+                    
+                        boolean valid = true;
+                        for (int l=0; l<j; l++) {
+                            if (sequence[l] == possibilities[j][k]) {
+                                valid = false;  
+                                break; 
+                            }
+                        }
+                        
+                        if (valid) {
+                            sequence[j] = possibilities[j][k];
+                            total += maxPrices[j];
+                            found = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!found) break;
+                    
+                }
+                
+                if (total > maxTotal) {
+                    maxTotal = total;
+                } 
+            }
+                
+            for (int genre : sequence) System.out.print(genre + " ");
+            System.out.println();
+            
         }
+        
+    }
+    
+    public static void main(String[] args) {
+    
+        Scanner sc = new Scanner(System.in);
+    
+        int days = sc.nextInt();
+        
+        List<Movie> horrorMovies = new ArrayList<>(); 
+        List<Movie> actionMovies = new ArrayList<>();
+        List<Movie> scifiMovies = new ArrayList<>();
 
-        int nextInt() {
-            return Integer.parseInt(next());
+        List<Movie> movies = Stream.of(horrorMovies, actionMovies, scifiMovies)
+                                   .flatMap(List::stream)
+                                   .collect(Collectors.toList());
+        
+        for (int i=0; i<days; i++) {
+            int price = sc.nextInt(); 
+            int capacity = sc.nextInt();
+            int percentage = sc.nextInt();
+            horrorMovies.add(new Movie(i+1, price, capacity, percentage)); 
         }
+        
+        for (int i=0; i<days; i++) {
+            int price = sc.nextInt();
+            int capacity = sc.nextInt(); 
+            int percentage = sc.nextInt();
+            actionMovies.add(new Movie(i+days+1, price, capacity, percentage));
+        }
+        
+        for (int i=0; i<days; i++) {
+            int price = sc.nextInt();
+            int capacity = sc.nextInt();
+            int percentage = sc.nextInt();
+            scifiMovies.add(new Movie(i+days*2+1, price, capacity, percentage)); 
+        }
+        
+        int numMoviegoers = sc.nextInt();
+        
+        List<Moviegoer> moviegoers = new ArrayList<>(); 
+        for (int i=0; i<numMoviegoers; i++) {
+            String type = sc.next();
+            int money = sc.nextInt();
+            
+            boolean isMember = type.equals("M"); 
+            moviegoers.add(new Moviegoer(i+1, isMember, money));
+        }
+        
+        int queries = sc.nextInt();
+        
+        while (queries-- > 0) {
+
+            String action = sc.next();
+        
+            if (action.equals("J")) {
+                
+                int type = sc.nextInt();
+                int day = sc.nextInt();
+                
+                joinFestival(days, movies, moviegoers, type, day);
+            
+            } else if (action.equals("B")) {
+                
+                int moviegoerId = sc.nextInt() - 1;
+                int movieId = sc.nextInt() - 1;
+                
+                Movie movie;
+                if (movieId < days) {
+                    movie = horrorMovies.get(movieId);
+                } else if (movieId < 2*days) {
+                    movie = actionMovies.get(movieId-days); 
+                } else {
+                    movie = scifiMovies.get(movieId-2*days);
+                }
+                
+                movie.book(moviegoers.get(moviegoerId));
+                System.out.println(movie.queue.size());
+                
+            } else if (action.equals("P")) {
+                int movieId = sc.nextInt() - 1;
+                
+                Movie movie; 
+                if (movieId < days) {
+                    movie = horrorMovies.get(movieId);
+                } else if (movieId < 2*days) {
+                    movie = actionMovies.get(movieId-days);
+                } else {
+                    movie = scifiMovies.get(movieId-2*days);
+                }
+                
+                movie.play();
+                
+            } else if (action.equals("T")) {
+                int type = sc.nextInt();
+                int moviegoerId = sc.nextInt() - 1;
+                int movieId = sc.nextInt() - 1;
+                
+                Movie movie;
+                if (movieId < days) {
+                    movie = horrorMovies.get(movieId);
+                } else if (movieId < 2*days) {
+                    movie = actionMovies.get(movieId-days);
+                } else {
+                    movie = scifiMovies.get(movieId-2*days); 
+                }
+                
+                System.out.println(movie.getViewerPos(moviegoers.get(moviegoerId)));
+                 
+            } else {
+                int type = sc.nextInt();
+                int day = sc.nextInt();
+
+                joinFestival(days, Stream.of(horrorMovies, actionMovies, scifiMovies)
+                                    .flatMap(x -> x.stream())
+                                    .collect(Collectors.toList()),
+                                    moviegoers,
+                                    type, day);
+            }
+            
+            
+        }
+        
+        sc.close();
     }
 }
