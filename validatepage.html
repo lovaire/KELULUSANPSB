@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validasi Nomor Pendaftaran</title>
+</head>
+<body>
+    <img src="https://backend.alghozali.ac.id/uploads/logo_pondok_modern_al_ghozali_d19d557372.png" alt="Logo Sekolah" style="position: absolute; top: 10px; left: 10px; width: 150px;">
+    <h1>Validasi Nomor Pendaftaran</h1>
+    <input type="text" id="nomorPendaftaran" placeholder="Masukkan Nomor Pendaftaran">
+    <button onclick="validateNomor()">Lanjut</button>
+
+    <script>
+        // Simpan nomor yang sudah dimiliki dalam array
+        const nomorTerdaftar = ["123", "456", "789"]; // Contoh data
+
+        function validateNomor() {
+            const inputNomor = document.getElementById("nomorPendaftaran").value;
+            if (nomorTerdaftar.includes(inputNomor)) {
+                // Nomor valid, arahkan ke halaman berikutnya (misalnya main.html)
+                window.location.href = "main.html";
+                // Hapus nomor dari array
+                const index = nomorTerdaftar.indexOf(inputNomor);
+                if (index !== -1) {
+                    nomorTerdaftar.splice(index, 1);
+                }
+            } else {
+                alert("Nomor pendaftaran tidak valid. Coba lagi.");
+            }
+        }
+    </script>
+</body>
+</html>

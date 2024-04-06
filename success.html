@@ -1,0 +1,25 @@
+<!-- success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selesai Mendaftar</title>
+</head>
+<body>
+    <h1>Sudah selesai mendaftar, data sudah masuk</h1>
+    <p>Nama: <span id="namaPlaceholder"></span></p>
+    <p>Nomor Pendaftaran: <span id="nomorPendaftaranPlaceholder"></span></p>
+
+    <script>
+        // Ambil data dari URL (misalnya menggunakan JavaScript)
+        const urlParams = new URLSearchParams(window.location.search);
+        const nama = urlParams.get("nama");
+        const nomorPendaftaran = urlParams.get("nomorPendaftaran");
+
+        // Isi placeholder dengan data yang diambil
+        document.getElementById("namaPlaceholder").textContent = nama;
+        document.getElementById("nomorPendaftaranPlaceholder").textContent = nomorPendaftaran;
+    </script>
+</body>
+</html>

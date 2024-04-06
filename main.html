@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Penerimaan Siswa Baru</title>
+    <style>
+        /* Gaya CSS untuk tampilan formulir */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhN-q_PA3LyaHQ1Z6bq00k6ox5YfHpH-zr2N-M3LIWom5yzLVWujimru_26BttOCrnUlGImCHMoo-cM3uIrHBcFGLUVywbklGPNf1Tn8CEF0J1wWt0yMnNQRGdiDX4sm2VBxdXELJl5mG4hhg5YPNPOy9G-v4HtDFqLn1A3G6_6jOCEB38HIe1LViZ6sFw/s1599/WhatsApp%20Image%202024-02-25%20at%2015.36.22_f9c5fa3f.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.527);
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        input, select {
+            display: flex;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            align-items: center;
+        }
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 1.2em;
+            }
+            img {
+                width: 100%; 
+            }
+            .container {
+                width: 90%;
+                height: auto;
+            }
+            input[type="text"], input[type="submit"] {
+                font-size: 1em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="https://backend.alghozali.ac.id/uploads/logo_pondok_modern_al_ghozali_d19d557372.png" alt="Logo Sekolah" style="position: absolute; top: 10px; left: 10px; width: 150px;">
+    <div class="container">
+        <h1>Formulir Penerimaan Siswa Baru</h1>
+        <form action="success.html" method="post">
+            <!-- Input Nama -->
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required>
+
+            <!-- Input Tempat Lahir -->
+            <label for="tempatLahir">Tempat Lahir:</label>
+            <input type="text" id="tempatLahir" name="tempatLahir" required>
+
+            <!-- Input Tanggal Lahir -->
+            <label for="tanggalLahir">Tanggal Lahir:</label>
+            <input type="date" id="tanggalLahir" name="tanggalLahir" required>
+
+            <!-- Input Agama -->
+            <label for="agama">Agama:</label>
+            <select id="agama" name="agama">
+                <option value="Islam">Islam</option>
+                <option value="Kristen">Lainnya</option>
+                <!-- Tambahkan opsi agama lainnya -->
+            </select>
+
+            <!-- Input Kewarganegaraan -->
+            <label for="kewarganegaraan">Kewarganegaraan:</label>
+            <select id="agama" name="agama">
+                <option value="Islam">Indonesia</option>
+                <option value="Kristen">Lainnya</option>
+                <!-- Tambahkan opsi agama lainnya -->
+            </select>
+
+            <!-- Input NIK -->
+            <label for="nik">NIK:</label>
+            <input type="text" id="nik" name="nik" required>
+
+            <!-- Input NISN -->
+            <label for="nisn">NISN:</label>
+            <input type="text" id="nisn" name="nisn" required>
+
+            <!-- Tombol Submit -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

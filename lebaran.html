@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ucapan Lebaran</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .thr {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" id="lebaranLink">Ucapan Lebaran</a>
+    <div class="thr" id="thrMessage"></div>
+
+    <script>
+        document.getElementById('lebaranLink').onclick = function(e) {
+            e.preventDefault();
+            var nama = prompt("Masukkan nama Anda:");
+            var thr = (nama.toLowerCase() === "melsa") ? "Rp. 200.000" : "Rp. 0";
+            document.getElementById('thrMessage').innerHTML = "Selamat Lebaran dan selamat Anda mendapatkan THR sebesar " + thr;
+            document.getElementById('thrMessage').style.display = "block";
+        }
+    </script>
+</body>
+</html>
