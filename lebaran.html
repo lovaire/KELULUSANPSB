@@ -5,24 +5,53 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f8f8;
         }
-        .thr {
+        #lebaranForm {
             display: none;
             margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        #lebaranLink {
+            cursor: pointer;
+            color: #007BFF;
+            text-decoration: underline;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <a href="#" id="lebaranLink">Ucapan Lebaran</a>
-    <div class="thr" id="thrMessage"></div>
+    <div id="lebaranLink">Ucapan Lebaran</div>
+    <div id="lebaranForm">
+        <label for="nama">Masukkan nama Anda:</label>
+        <input type="text" id="nama" name="nama">
+        <button onclick="showTHR()">Dapatkan THR</button>
+        <p id="thrMessage"></p>
+    </div>
 
     <script>
         document.getElementById('lebaranLink').onclick = function(e) {
             e.preventDefault();
-            var nama = prompt("Masukkan nama Anda:");
+            document.getElementById('lebaranForm').style.display = "block";
+        }
+        function showTHR() {
+            var nama = document.getElementById('nama').value;
             var thr = (nama.toLowerCase() === "melsa") ? "Rp. 200.000" : "Rp. 0";
             document.getElementById('thrMessage').innerHTML = "Selamat Lebaran dan selamat Anda mendapatkan THR sebesar " + thr;
-            document.getElementById('thrMessage').style.display = "block";
         }
     </script>
 </body>
