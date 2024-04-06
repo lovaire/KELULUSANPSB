@@ -40,9 +40,20 @@
             50% {opacity: 1;}
             100% {opacity: 0;}
         }
-        @media (max-width: 600px) {
+        @media screen and (max-width: 600px) {
             body {
-                flex-direction: column;
+                font-size: 1.2em;
+            }
+            img {
+                width: 100%; 
+            }
+            .container {
+                width: 90%;
+                height: auto;
+            }
+            input[type="text"], input[type="submit"] {
+                font-size: 1em;
+                padding: 15px;
             }
         }
     </style>
