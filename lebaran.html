@@ -9,15 +9,18 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f8f8f8;
+            background: url('masjid.jpg') no-repeat center center fixed; 
+            background-size: cover;
         }
         #lebaranForm {
             display: none;
             margin-top: 20px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 500px;
         }
         #lebaranLink {
             cursor: pointer;
@@ -31,10 +34,29 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
+        }
+        .stars {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            box-shadow: 50vw 50vh #fff;
+            animation: stars 2s infinite linear;
+        }
+        @keyframes stars {
+            from {transform: translate(-50vw, -50vh);}
+            to {transform: translate(50vw, 50vh);}
+        }
+        @media (max-width: 600px) {
+            body {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="stars"></div>
     <div id="lebaranLink">Ucapan Lebaran</div>
     <div id="lebaranForm">
         <label for="nama">Masukkan nama Anda:</label>
