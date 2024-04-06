@@ -2,14 +2,15 @@
 <html>
 <head>
     <title>Ucapan Lebaran</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('masjid.jpg') no-repeat center center fixed; 
+            background: url('https://i.pinimg.com/originals/57/29/e8/5729e884cf0bed575505da28b7d2a800.jpg') no-repeat center center fixed; 
             background-size: cover;
         }
         #lebaranForm {
@@ -29,6 +30,7 @@
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
+            font-weight: 700;
         }
         .fade-in-out {
             animation: fadeInOut 2s infinite;
@@ -58,6 +60,8 @@
             var nama = document.getElementById('nama').value;
             var thr = (nama.toLowerCase() === "melsa") ? "Rp. 200.000" : "Rp. 0";
             document.getElementById('thrMessage').innerHTML = "Minal Aidin wal Faizin. Selamat Anda mendapatkan THR sebesar " + thr;
+            document.getElementById('nama').style.display = "none";
+            document.querySelector('button').style.display = "none";
         }
     </script>
 </body>
