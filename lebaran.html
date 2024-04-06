@@ -13,19 +13,13 @@
             background-size: cover;
         }
         #lebaranForm {
-            display: none;
-            margin-top: 20px;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
             width: 80%;
             max-width: 500px;
-        }
-        #lebaranLink {
-            cursor: pointer;
-            color: #007BFF;
-            text-decoration: underline;
+            text-align: center;
         }
         button {
             background-color: #007BFF;
@@ -36,17 +30,13 @@
             cursor: pointer;
             width: 100%;
         }
-        .stars {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            background: transparent;
-            box-shadow: 50vw 50vh #fff;
-            animation: stars 2s infinite linear;
+        .fade-in-out {
+            animation: fadeInOut 2s infinite;
         }
-        @keyframes stars {
-            from {transform: translate(-50vw, -50vh);}
-            to {transform: translate(50vw, 50vh);}
+        @keyframes fadeInOut {
+            0% {opacity: 0;}
+            50% {opacity: 1;}
+            100% {opacity: 0;}
         }
         @media (max-width: 600px) {
             body {
@@ -56,24 +46,18 @@
     </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div id="lebaranLink">Ucapan Lebaran</div>
     <div id="lebaranForm">
         <label for="nama">Masukkan nama Anda:</label>
         <input type="text" id="nama" name="nama">
         <button onclick="showTHR()">Dapatkan THR</button>
-        <p id="thrMessage"></p>
+        <p id="thrMessage" class="fade-in-out"></p>
     </div>
 
     <script>
-        document.getElementById('lebaranLink').onclick = function(e) {
-            e.preventDefault();
-            document.getElementById('lebaranForm').style.display = "block";
-        }
         function showTHR() {
             var nama = document.getElementById('nama').value;
             var thr = (nama.toLowerCase() === "melsa") ? "Rp. 200.000" : "Rp. 0";
-            document.getElementById('thrMessage').innerHTML = "Selamat Lebaran dan selamat Anda mendapatkan THR sebesar " + thr;
+            document.getElementById('thrMessage').innerHTML = "Minal Aidin wal Faizin. Selamat Anda mendapatkan THR sebesar " + thr;
         }
     </script>
 </body>
