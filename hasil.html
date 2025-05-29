@@ -545,13 +545,15 @@
                 document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
                 document.getElementById('pesan').innerHTML = 'Jangan patah semangat, terus berusaha dan belajar lebih giat! („• ֊ •„)੭';
                 document.getElementById('hasil').className = 'hasil tidak-lulus';
-            } else if (nomor in dataLulusBersyarat) {
-                document.getElementById('hasil').innerHTML = '<p>Maaf, Anda Dinyatakan Lulus Bersyarat</p>'; /* Teks di dalam elemen <p> */
-                document.getElementById('nama').innerHTML = 'Nama: ' + dataLulusBersyarat[nomor];
-                document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
-                document.getElementById('pesan').innerHTML = 'Untuk informasi selengkapnya, silakan menghubungi panitia, Terima Kasih.';
-                document.getElementById('hasil').className = 'hasil lulus-bersyarat';
-            } else {
+            } 
+                // else if (nomor in dataLulusBersyarat) {
+            //     document.getElementById('hasil').innerHTML = '<p>Maaf, Anda Dinyatakan Lulus Bersyarat</p>'; /* Teks di dalam elemen <p> */
+            //     document.getElementById('nama').innerHTML = 'Nama: ' + dataLulusBersyarat[nomor];
+            //     document.getElementById('nomor').innerHTML = 'Nomor PSB: ' + nomor;
+            //     document.getElementById('pesan').innerHTML = 'Untuk informasi selengkapnya, silakan menghubungi panitia, Terima Kasih.';
+            //     document.getElementById('hasil').className = 'hasil lulus-bersyarat';
+            // } 
+                else {
                 document.getElementById('hasil').innerHTML = '<p>Nomor ujian tidak ditemukan.</P>';
                 document.getElementById('hasil').className = 'hasil tidak-ada';
             }
